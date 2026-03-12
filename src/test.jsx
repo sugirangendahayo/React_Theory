@@ -1,3 +1,4 @@
+/*
 Part 2:
 - Add a `<header>` element with an `<img />` element with the image of the
   React logo inside (src="react-logo.png") and make sure to set the
@@ -18,7 +19,7 @@ const root = createRoot(document.getElementById("root"))
       return (
           <div>
               <header>
-                  <img src="react-logo.png" width="40px" alt="React logo" />
+                  <img src="./src/assets/react-logo.png" width="40px" alt="React logo" />
               </header>
               <main>
                   <h1>Reason I am excited to learn React</h1>
