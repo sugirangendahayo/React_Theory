@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import Navbar from './components/ui';
+
+import NavBar from './components/ui/NavBar';
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <Navbar />
+      <NavBar />
     </>
   )
 }

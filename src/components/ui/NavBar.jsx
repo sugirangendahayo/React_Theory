@@ -1,17 +1,24 @@
-import React, {useState}  from 'react';
-
-
 function NavBar() {
-  const 
-  const [logo, setLogo] = useState("Solomon")
-  const navMenus = ["Home", "About","Services", "Contact"];
+  const logo = "Solomon";
+
+  const navMenus = ["Home", "About", "Services", "Contact"];
   const navAuthBtns = ["Signup", "Login"];
-  
+
   return (
     <>
-      <div>
-        <h1>{{logo}}</h1>
-      </div>
+      <header className="flex justify-around items-center">
+        <h >{logo}</h>
+        <div>
+          {navMenus.map((menu, index) => {
+            return <p key={index}>{menu}</p>;
+          })}
+        </div>
+        <div>
+          {navAuthBtns.map((btn, index) => {
+            return <button key={index}>{btn}</button>;
+          })}
+        </div>
+      </header>
     </>
   );
 }
