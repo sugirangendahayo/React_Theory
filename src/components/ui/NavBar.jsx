@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <>
       <header className="flex justify-around items-center">
-        <h >{logo}</h>
+        <h1>{logo}</h1>
         <div>
           {navMenus.map((menu, index) => {
             return <p key={index}>{menu}</p>;

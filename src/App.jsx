@@ -1,12 +1,10 @@
 
-import NavBar from './components/ui/NavBar';
+import TestDom from './components/ui/TestDom';
 
 function App() {
-  
-
   return (
     <>
-      <NavBar />
+      <TestDom />
     </>
   )
 }
