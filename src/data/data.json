@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "img": {
+      "src": "https://via.placeholder.com/150",
+      "alt": "Product 1"
+    },
+    "title": "Product 1",
+    "description": "This is a product that you can buy online and have delivered to your home",
+    "price": "100"
+  },
+  {
+    "id": 2,
+    "img": {
+      "src": "https://via.placeholder.com/150",
+      "alt": "Product 2"
+    },
+    "title": "Product 2",
+    "description": "This is a product that you can buy online and have delivered to your home",
+    "price": "200"
+  },
+  {
+    "id": 3,
+    "img": {
+      "src": "https://via.placeholder.com/150",
+      "alt": "Product 3"
+    },
+    "title": "Product 3",
+    "description": "This is a product that you can buy online and have delivered to your home",
+    "price": "300"
+  },
+  {
+    "id": 4,
+    "img": {
+      "src": "https://via.placeholder.com/150",
+      "alt": "Product 4"
+    },
+    "title": "Product 4",
+    "description": "This is a product that you can buy online and have delivered to your home",
+    "price": "400"
+  },
+  {
+    "id": 5,
+    "img": {
+      "src": "https://via.placeholder.com/150",
+      "alt": "Product 5"
+    },
+    "title": "Product 5",
+    "description": "This is a product that you can buy online and have delivered to your home",
+    "price": "500"
+  }
+]
