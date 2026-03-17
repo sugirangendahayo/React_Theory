@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "About React",
+    "description": "This blog is about the importance of learning and understanding the world around us. It is a place to share knowledge and ideas, and to inspire others to do the same.",
+    "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications.",
+    "author": "Salomon Elisha",
+    "date": "2025-10-13"
+  },
+  {
+    "id": 2,
+    "title": "About JavaScript",
+    "description": "This blog is about the importance of learning and understanding the world around us. It is a place to share knowledge and ideas, and to inspire others to do the same.",
+    "content": "JavaScript is a programming language that is one of the core technologies of the World Wide Web. JavaScript enables interactive web pages and is an essential part of web applications.",
+    "author": "Salomon Elisha",
+    "date": "2025-10-13"
+  },
+  {
+    "id": 3,
+    "title": "About CSS",
+    "description": "This blog is about the importance of learning and understanding the world around us. It is a place to share knowledge and ideas, and to inspire others to do the same.",
+    "content": "CSS is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.",
+    "author": "Salomon Elisha",
+    "date": "2025-10-13"
+  },
+  {
+    "id": 4,
+    "title": "About HTML",
+    "description": "This blog is about the importance of learning and understanding the world around us. It is a place to share knowledge and ideas, and to inspire others to do the same.",
+    "content": "HTML is the standard markup language for documents designed to be displayed in a web browser. It defines the meaning and structure of web content.",
+    "author": "Salomon Elisha",
+    "date": "2025-10-13"
+  },
+  {
+    "id": 5,
+    "title": "About TypeScript",
+    "description": "This blog is about the importance of learning and understanding the world around us. It is a place to share knowledge and ideas, and to inspire others to do the same.",
+    "content": "TypeScript is a programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript and adds optional static typing to the language.",
+    "author": "Salomon Elisha",
+    "date": "2025-10-13"
+  }
+]
