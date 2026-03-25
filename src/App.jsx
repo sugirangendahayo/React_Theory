@@ -18,11 +18,13 @@ function App() {
   }
   useEffect(() => {
     async function fetchPosts() {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts",
-      );
-      let myData = await response.json();
-      setData(myData);
+      setTimeout(async () => {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/posts",
+        );
+        let myData = await response.json();
+        setData(myData);
+      }, 5000);
     }
     fetchPosts();
   }, []);
