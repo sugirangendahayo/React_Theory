@@ -1,68 +1,34 @@
-import { useEffect, useState } from "react";
-import Blog from "./components/ui/Blog";
-import NavBar from "./components/ui/NavBar";
+import { useRef, useState } from "react";
 
 function App() {
-  console.log("App component re-rendered");
+  console.log("App rendered!")
+  let ref = useRef(0);
+  const [isDisable, setIsDiable] = useState(false);
 
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(0); 
+  console.log(ref);
+  function clicksCounter(e) {
+  e.preventDefault()
+    let counter = (ref.current = ref.current + 1);
+    if (counter === 5) {
+      setIsDiable(true);
+    }
 
-  useEffect(() => {
-    console.log(" useEffect running");
-
-    const fetchBlogs = async () => {
-      console.log("Fetching blogs...");
-
-      try {
-        const response = await fetch("/src/data/blogs.json");
-        const data = await response.json();
-
-        console.log("Data received");
-        setBlogs(data);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
-  },[]); 
+    console.log(`Clicked ${counter} time`);
+  }
 
   return (
     <>
-      <NavBar />
-
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-4 text-gray-800">
-          Blog Posts
-        </h1>
-
-        <div className="text-center mb-6">
-          <p>Count: {count}</p>
+      <div className="h-screen flex justify-center items-center">
+        <form action="">
           <button
-            onClick={() => {
-              console.log(" Button clicked");
-              setCount(count + 1);
-            }}
-            className="bg-cyan-500 text-white px-4 py-2 rounded"
+            disabled={isDisable}
+            onClick={clicksCounter}
+            className={`px-3 py-2 rounded-xl ${isDisable ? " bg-gray-400 text-red-400 cursor-not-allowed" : " bg-black  text-white cursor-pointer "}`}
           >
-            Increase Count
+            {isDisable ? "Disabled!" : "Click me!"}
           </button>
-        </div>
-
-        {loading ? (
-          <p className="text-center">Loading...</p>
-        ) : (
-          <div className="max-w-4xl mx-auto">
-            {blogs.map((blog) => (
-              <Blog key={blog.id} blog={blog} />
-            ))}
-          </div>
-        )}
-      </main>
+        </form>
+      </div>
     </>
   );
 }
