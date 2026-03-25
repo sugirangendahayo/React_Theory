@@ -1,7 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState , useEffect} from "react";
 
 function App() {
-  console.log("App rendered!")
+
+  console.log("App rendered!");
+  const [data, setData] = useState([]);
+
+  
+ 
+
   let ref = useRef(0);
   const [isDisable, setIsDiable] = useState(false);
 
@@ -15,6 +21,12 @@ function App() {
 
     console.log(`Clicked ${counter} time`);
   }
+   useEffect(()=>{
+    async function fetchPosts(){
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+      console.log("Response: ", response)
+    }
+  }, [clicksCounter])
 
   return (
     <>
