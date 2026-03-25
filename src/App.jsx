@@ -27,7 +27,7 @@ function App() {
       console.log("Response: ", response)
     }
     fetchPosts()
-  }, [clicksCounter])
+  }, [])
 
   return (
     <>
