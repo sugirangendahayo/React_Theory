@@ -4,27 +4,28 @@ function App() {
 
   console.log("App rendered!");
   const [data, setData] = useState([]);
-
   
- 
-
+  
+  
+  
   let ref = useRef(0);
   const [isDisable, setIsDiable] = useState(false);
-
+  
   console.log(ref);
   function clicksCounter(e) {
-  e.preventDefault()
+    e.preventDefault()
     let counter = (ref.current = ref.current + 1);
     if (counter === 5) {
       setIsDiable(true);
     }
-
+    
     console.log(`Clicked ${counter} time`);
   }
-   useEffect(()=>{
+  useEffect(()=>{
     async function fetchPosts(){
       const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-      console.log("Response: ", response)
+      setData(await response.json());
+      console.log("Data: ", data)
     }
     fetchPosts()
   }, [])
