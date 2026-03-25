@@ -26,6 +26,7 @@ function App() {
       const response = await fetch("https://jsonplaceholder.typicode.com/posts");
       console.log("Response: ", response)
     }
+    fetchPosts()
   }, [clicksCounter])
 
   return (
