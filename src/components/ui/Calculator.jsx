@@ -72,6 +72,8 @@ export default function Calculator() {
         }
         return firstValue / secondValue;
       case "=":
+        // Equals operation - return the calculated result
+        console.log(`Equals operation: returning result`);
         return secondValue;
       default:
         return secondValue;
