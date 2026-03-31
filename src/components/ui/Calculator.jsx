@@ -52,6 +52,8 @@ export default function Calculator() {
   const calculate = (firstValue, secondValue, operation) => {
     switch (operation) {
       case "+":
+        // Addition operation implemented
+        console.log(`Adding: ${firstValue} + ${secondValue}`);
         return firstValue + secondValue;
       case "-":
         return firstValue - secondValue;

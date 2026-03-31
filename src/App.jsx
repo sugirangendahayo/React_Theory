@@ -1,6 +1,3 @@
-// import DisplayPosts from "./components/ui/DisplayPosts";
-// import NavBar from "./components/ui/NavBar";
-
 import Counter from "./components/ui/Counter";
 
 function App() {
@@ -10,6 +7,7 @@ function App() {
       {/* <NavBar /> */}
       {/* <DisplayPosts /> */}
       <Counter />
+      <Calculator />
     </>
   );
 }
