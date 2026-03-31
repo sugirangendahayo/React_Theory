@@ -64,6 +64,12 @@ export default function Calculator() {
         console.log(`Multiplying: ${firstValue} * ${secondValue}`);
         return firstValue * secondValue;
       case "/":
+        // Division operation implemented with zero check
+        console.log(`Dividing: ${firstValue} / ${secondValue}`);
+        if (secondValue === 0) {
+          console.log("Error: Division by zero");
+          return "Error";
+        }
         return firstValue / secondValue;
       case "=":
         return secondValue;
