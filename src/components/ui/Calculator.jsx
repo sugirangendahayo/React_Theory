@@ -26,6 +26,8 @@ export default function Calculator() {
   };
 
   const clear = () => {
+    // Clear operation implemented
+    console.log("Clearing calculator");
     setDisplay("0");
     setPreviousValue(null);
     setOperation(null);
