@@ -60,6 +60,8 @@ export default function Calculator() {
         console.log(`Subtracting: ${firstValue} - ${secondValue}`);
         return firstValue - secondValue;
       case "*":
+        // Multiplication operation implemented
+        console.log(`Multiplying: ${firstValue} * ${secondValue}`);
         return firstValue * secondValue;
       case "/":
         return firstValue / secondValue;
