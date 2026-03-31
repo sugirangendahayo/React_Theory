@@ -1,0 +1,85 @@
+.calculator {
+  max-width: 320px;
+  margin: 0 auto;
+  background: #2c3e50;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-family: 'Arial', sans-serif;
+}
+
+.calculator-display {
+  background: #1a252f;
+  color: #fff;
+  font-size: 2.5em;
+  text-align: right;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.calculator-keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.keypad-row {
+  display: flex;
+  gap: 10px;
+}
+
+.key {
+  flex: 1;
+  padding: 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.key:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.key:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.key-number {
+  background: #95a5a6;
+  color: #2c3e50;
+}
+
+.key-operator {
+  background: #e67e22;
+  color: #fff;
+}
+
+.key-clear {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.key-equals {
+  background: #27ae60;
+  color: #fff;
+}
+
+.key-decimal {
+  background: #7f8c8d;
+  color: #fff;
+}
+
+.key-zero {
+  flex: 2;
+}
