@@ -187,7 +187,7 @@ function FilteredListWithHook({ items, query }) {
   );
 }
 
-// Step 6: Complex example with multiple filters
+// Step 3: Complex example with multiple filters
 function useAdvancedFilter(items, filters) {
   const filtered = React.useMemo(() => {
     let result = items;
@@ -249,8 +249,8 @@ function AdvancedFilteredList({ items }) {
   };
 
   return (
-    <div className="p-4 border border-orange-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-orange-600 mb-2">
+    <div className="p-4 border border-indigo-300 rounded-lg mb-4">
+      <h3 className="text-lg font-semibold text-indigo-600 mb-2">
         Advanced FilteredList (Multiple Filters)
       </h3>
 
@@ -329,7 +329,7 @@ function AdvancedFilteredList({ items }) {
         <p className="text-sm text-gray-500 italic">No results found</p>
       )}
 
-      <p className="text-xs text-orange-600">
+      <p className="text-xs text-indigo-600">
         ✅ Advanced: useMemo for complex filtering with multiple criteria
       </p>
     </div>
@@ -386,6 +386,7 @@ export default function EffectVsRenderLogic() {
       <FilteredListFixed items={items} query={query} />
       <ExpensiveFilteredList items={items} query={query} />
       <FilteredListWithHook items={items} query={query} />
+      <PerformanceFilteredList items={items} query={query} />
       <AdvancedFilteredList items={items} />
 
       <div className="mt-6 p-4 bg-yellow-100 rounded-lg">
@@ -405,6 +406,10 @@ export default function EffectVsRenderLogic() {
           <li>
             <strong>useMemo:</strong> Only for expensive computations, not
             simple filtering
+          </li>
+          <li>
+            <strong>Performance:</strong> Render computation is more efficient
+            than useEffect
           </li>
           <li>
             <strong>Best practice:</strong> Effects for side effects, render for
