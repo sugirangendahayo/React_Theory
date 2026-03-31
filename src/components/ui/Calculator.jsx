@@ -17,6 +17,8 @@ export default function Calculator() {
   };
 
   const inputDecimal = () => {
+    // Decimal point operation implemented
+    console.log("Adding decimal point");
     if (waitingForNewValue) {
       setDisplay("0.");
       setWaitingForNewValue(false);
