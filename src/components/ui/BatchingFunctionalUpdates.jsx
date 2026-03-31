@@ -187,65 +187,6 @@ function CounterWithHook() {
   );
 }
 
-// Step 6: Complex example with multiple state updates
-function ComplexCounter() {
-  const [count, setCount] = React.useState(0);
-  const [history, setHistory] = React.useState([]);
-  const [lastAction, setLastAction] = React.useState("");
-
-  function complexIncrement() {
-    // Multiple state updates with functional forms
-    setCount((prevCount) => {
-      const newCount = prevCount + 2;
-      return newCount;
-    });
-
-    setHistory((prevHistory) => [
-      ...prevHistory,
-      `Incremented to ${count + 2}`,
-    ]);
-    setLastAction(`Incremented by 2`);
-  }
-
-  function reset() {
-    setCount(0);
-    setHistory([]);
-    setLastAction("Reset");
-  }
-
-  return (
-    <div className="p-4 border border-orange-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-orange-600 mb-2">
-        Complex Counter (Multiple State)
-      </h3>
-      <div className="space-y-2 mb-3">
-        <button
-          onClick={complexIncrement}
-          className="px-3 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 mr-2"
-        >
-          +2 (with history)
-        </button>
-        <button
-          onClick={reset}
-          className="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
-        >
-          Reset
-        </button>
-      </div>
-      <div className="text-sm text-gray-600">
-        <p>Count: {count}</p>
-        <p>Last Action: {lastAction}</p>
-        <p>
-          History ({history.length} actions): {history.slice(-2).join(", ")}
-        </p>
-      </div>
-      <p className="text-xs text-orange-600 mt-2">
-        ✅ Complex: Multiple state updates with functional forms
-      </p>
-    </div>
-  );
-}
-
 export default function BatchingFunctionalUpdates() {
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -266,6 +207,7 @@ export default function BatchingFunctionalUpdates() {
       <CounterFixed />
       <CounterFlushSync />
       <CounterWithHook />
+      <PerformanceCounter />
       <ComplexCounter />
 
       <div className="mt-6 p-4 bg-yellow-100 rounded-lg">
@@ -286,6 +228,10 @@ export default function BatchingFunctionalUpdates() {
           <li>
             <strong>flushSync:</strong> Forces immediate update but breaks
             batching
+          </li>
+          <li>
+            <strong>Performance:</strong> Functional updates maintain batching
+            efficiency
           </li>
           <li>
             <strong>Best practice:</strong> Always use functional updates for
