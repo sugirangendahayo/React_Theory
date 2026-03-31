@@ -18,7 +18,7 @@ const Counter = () => {
             className="bg-cyan-800 text-white p-4 rounded-xl cursor-pointer"
             onClick={increment}
           >
-            +
+            Add
           </button>
           <p className="">{count}</p>
           <button
