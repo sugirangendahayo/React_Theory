@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /*
 ## Questions:
@@ -24,7 +24,9 @@ function CartBuggy({ items }) {
 
   return (
     <div className="p-4 border border-red-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-red-600 mb-2">Buggy Cart (Derived State Anti-pattern)</h3>
+      <h3 className="text-lg font-semibold text-red-600 mb-2">
+        Buggy Cart (Derived State Anti-pattern)
+      </h3>
       <div className="text-sm text-gray-600 mb-2">
         <p>Items: {items.length}</p>
         <p>Total: ${total.toFixed(2)}</p>
@@ -47,7 +49,9 @@ function CartWrongFix({ items }) {
 
   return (
     <div className="p-4 border border-yellow-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-yellow-600 mb-2">Wrong Fix (Still Anti-pattern)</h3>
+      <h3 className="text-lg font-semibold text-yellow-600 mb-2">
+        Wrong Fix (Still Anti-pattern)
+      </h3>
       <div className="text-sm text-gray-600 mb-2">
         <p>Items: {items.length}</p>
         <p>Total: ${total.toFixed(2)}</p>
@@ -66,7 +70,9 @@ function CartFixed({ items }) {
 
   return (
     <div className="p-4 border border-green-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-green-600 mb-2">Fixed Cart (Calculate on Render)</h3>
+      <h3 className="text-lg font-semibold text-green-600 mb-2">
+        Fixed Cart (Calculate on Render)
+      </h3>
       <div className="text-sm text-gray-600 mb-2">
         <p>Items: {items.length}</p>
         <p>Total: ${total.toFixed(2)}</p>
@@ -87,7 +93,9 @@ function CartOptimized({ items }) {
 
   return (
     <div className="p-4 border border-blue-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-blue-600 mb-2">Optimized Cart (useMemo)</h3>
+      <h3 className="text-lg font-semibold text-blue-600 mb-2">
+        Optimized Cart (useMemo)
+      </h3>
       <div className="text-sm text-gray-600 mb-2">
         <p>Items: {items.length}</p>
         <p>Total: ${total.toFixed(2)}</p>
@@ -122,7 +130,9 @@ function CartWithHook({ items }) {
 
   return (
     <div className="p-4 border border-purple-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-purple-600 mb-2">Cart with Custom Hook</h3>
+      <h3 className="text-lg font-semibold text-purple-600 mb-2">
+        Cart with Custom Hook
+      </h3>
       <div className="text-sm text-gray-600 mb-2">
         <p>Items: {itemCount}</p>
         <p>Total: ${total.toFixed(2)}</p>
@@ -135,71 +145,33 @@ function CartWithHook({ items }) {
   );
 }
 
-// Step 6: Complex example with multiple derived values
-function CartComplex({ items, discount = 0, tax = 0.1 }) {
-  const subtotal = React.useMemo(() => {
-    return items.reduce((sum, item) => sum + item.price, 0);
-  }, [items]);
-
-  const discountAmount = React.useMemo(() => {
-    return subtotal * (discount / 100);
-  }, [subtotal, discount]);
-
-  const afterDiscount = React.useMemo(() => {
-    return subtotal - discountAmount;
-  }, [subtotal, discountAmount]);
-
-  const taxAmount = React.useMemo(() => {
-    return afterDiscount * tax;
-  }, [afterDiscount, tax]);
-
-  const total = React.useMemo(() => {
-    return afterDiscount + taxAmount;
-  }, [afterDiscount, taxAmount]);
-
-  return (
-    <div className="p-4 border border-orange-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-orange-600 mb-2">Complex Cart (Multiple Derived Values)</h3>
-      <div className="text-sm text-gray-600 mb-2">
-        <p>Items: {items.length}</p>
-        <p>Subtotal: ${subtotal.toFixed(2)}</p>
-        <p>Discount ({discount}%): -${discountAmount.toFixed(2)}</p>
-        <p>After discount: ${afterDiscount.toFixed(2)}</p>
-        <p>Tax ({(tax * 100).toFixed(0)}%): ${taxAmount.toFixed(2)}</p>
-        <p><strong>Total: ${total.toFixed(2)}</strong></p>
-      </div>
-      <p className="text-xs text-orange-600">
-        ✅ Complex: Multiple derived values with proper memoization
-      </p>
-    </div>
-  );
-}
-
 export default function IncorrectDerivedState() {
   const [items, setItems] = React.useState([
-    { id: 1, name: 'Apple', price: 1.99 },
-    { id: 2, name: 'Banana', price: 0.99 },
-    { id: 3, name: 'Orange', price: 2.49 }
+    { id: 1, name: "Apple", price: 1.99 },
+    { id: 2, name: "Banana", price: 0.99 },
+    { id: 3, name: "Orange", price: 2.49 },
   ]);
 
   const addItem = () => {
-    const newId = Math.max(...items.map(item => item.id), 0) + 1;
+    const newId = Math.max(...items.map((item) => item.id), 0) + 1;
     const newItem = {
       id: newId,
       name: `Item ${newId}`,
-      price: Math.random() * 10 + 1
+      price: Math.random() * 10 + 1,
     };
     setItems([...items, newItem]);
   };
 
   const removeItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
+    setItems(items.filter((item) => item.id !== id));
   };
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">Incorrect Derived State Anti-pattern</h2>
-      
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Incorrect Derived State Anti-pattern
+      </h2>
+
       <div className="mb-6 p-4 bg-gray-100 rounded-lg">
         <h3 className="font-semibold mb-2">Questions:</h3>
         <ol className="list-decimal list-inside space-y-1 text-sm">
@@ -211,9 +183,14 @@ export default function IncorrectDerivedState() {
       <div className="mb-6 p-4 bg-gray-50 rounded-lg">
         <h3 className="font-semibold mb-2">Cart Items:</h3>
         <div className="space-y-2 mb-4">
-          {items.map(item => (
-            <div key={item.id} className="flex justify-between items-center p-2 bg-white rounded border">
-              <span className="text-sm">{item.name} - ${item.price.toFixed(2)}</span>
+          {items.map((item) => (
+            <div
+              key={item.id}
+              className="flex justify-between items-center p-2 bg-white rounded border"
+            >
+              <span className="text-sm">
+                {item.name} - ${item.price.toFixed(2)}
+              </span>
               <button
                 onClick={() => removeItem(item.id)}
                 className="px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600"
@@ -236,16 +213,35 @@ export default function IncorrectDerivedState() {
       <CartFixed items={items} />
       <CartOptimized items={items} />
       <CartWithHook items={items} />
+      <ExpensiveCart items={items} />
       <CartComplex items={items} discount={10} tax={0.08} />
 
       <div className="mt-6 p-4 bg-yellow-100 rounded-lg">
         <h3 className="font-semibold mb-2">Explanation:</h3>
         <ul className="list-disc list-inside space-y-2 text-sm">
-          <li><strong>Anti-pattern:</strong> Storing derived state in useState + useEffect</li>
-          <li><strong>Problems:</strong> Redundant state, synchronization issues, complexity</li>
-          <li><strong>Correct approach:</strong> Calculate derived values on render</li>
-          <li><strong>Optimization:</strong> Use useMemo for expensive calculations</li>
-          <li><strong>Best practice:</strong> Extract logic into custom hooks</li>
+          <li>
+            <strong>Anti-pattern:</strong> Storing derived state in useState +
+            useEffect
+          </li>
+          <li>
+            <strong>Problems:</strong> Redundant state, synchronization issues,
+            complexity
+          </li>
+          <li>
+            <strong>Correct approach:</strong> Calculate derived values on
+            render
+          </li>
+          <li>
+            <strong>Optimization:</strong> Use useMemo for expensive
+            calculations
+          </li>
+          <li>
+            <strong>Performance:</strong> Memoization prevents unnecessary
+            re-calculations
+          </li>
+          <li>
+            <strong>Best practice:</strong> Extract logic into custom hooks
+          </li>
         </ul>
       </div>
     </div>
