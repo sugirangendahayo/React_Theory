@@ -15,7 +15,7 @@ const Posts = ({data, isDisable}) => {
                     Post: {post.id}
                   </h1>
                   <h1 className="text-xl font-semibold">{post.title}</h1>
-                  <p>{post.body}</p>
+                  <p>{post.description}</p>
                 </div>
               ))
             ) : (
