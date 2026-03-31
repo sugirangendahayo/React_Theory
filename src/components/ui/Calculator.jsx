@@ -56,6 +56,8 @@ export default function Calculator() {
         console.log(`Adding: ${firstValue} + ${secondValue}`);
         return firstValue + secondValue;
       case "-":
+        // Subtraction operation implemented
+        console.log(`Subtracting: ${firstValue} - ${secondValue}`);
         return firstValue - secondValue;
       case "*":
         return firstValue * secondValue;
