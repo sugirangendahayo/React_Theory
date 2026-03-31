@@ -7,7 +7,7 @@ function App() {
       {/* <NavBar /> */}
       {/* <DisplayPosts /> */}
       <Counter />
-      <Calculator />
+      {/* <Calculator /> */}
     </>
   );
 }
