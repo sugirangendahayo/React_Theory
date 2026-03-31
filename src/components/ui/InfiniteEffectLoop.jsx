@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /*
 ## Questions:
@@ -19,13 +19,15 @@ function AppBuggy() {
 
   React.useEffect(() => {
     fetch("https://dummyjson.com/posts")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setData);
   }, [data]); // BUG: Including data causes infinite loop
 
   return (
     <div className="p-4 border border-red-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-red-600 mb-2">Buggy App (Infinite Loop)</h3>
+      <h3 className="text-lg font-semibold text-red-600 mb-2">
+        Buggy App (Infinite Loop)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">Posts loaded: {data.length}</p>
       <p className="text-xs text-red-500">
         Check network tab - infinite requests!
@@ -40,14 +42,16 @@ function AppWrongFix() {
 
   React.useEffect(() => {
     fetch("https://dummyjson.com/posts")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setData);
   }, []); // BETTER: Empty dependency array prevents infinite loop
   // But this is still not ideal - no error handling, no loading state
 
   return (
     <div className="p-4 border border-yellow-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-yellow-600 mb-2">Partial Fix (No Error Handling)</h3>
+      <h3 className="text-lg font-semibold text-yellow-600 mb-2">
+        Partial Fix (No Error Handling)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">Posts loaded: {data.length}</p>
       <p className="text-xs text-yellow-600">
         Fixed infinite loop but missing loading/error states
@@ -75,7 +79,7 @@ function AppFixed() {
         setData(result.posts || result); // Handle different response structures
       } catch (err) {
         setError(err.message);
-        console.error('Fetch error:', err);
+        console.error("Fetch error:", err);
       } finally {
         setLoading(false);
       }
@@ -86,22 +90,20 @@ function AppFixed() {
 
   return (
     <div className="p-4 border border-green-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-green-600 mb-2">Fixed App (Complete Solution)</h3>
-      
-      {loading && (
-        <div className="text-blue-600 mb-2">Loading posts...</div>
-      )}
-      
-      {error && (
-        <div className="text-red-600 mb-2">Error: {error}</div>
-      )}
-      
+      <h3 className="text-lg font-semibold text-green-600 mb-2">
+        Fixed App (Complete Solution)
+      </h3>
+
+      {loading && <div className="text-blue-600 mb-2">Loading posts...</div>}
+
+      {error && <div className="text-red-600 mb-2">Error: {error}</div>}
+
       {!loading && !error && (
         <p className="text-sm text-gray-600 mb-2">
           Posts loaded: {data.length}
         </p>
       )}
-      
+
       <p className="text-xs text-green-600">
         ✅ Fixed infinite loop + added loading/error states
       </p>
@@ -109,7 +111,7 @@ function AppFixed() {
   );
 }
 
-// Step 4: Advanced solution with retry functionality
+// Step 2: Custom hook solution
 function AppAdvanced() {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -129,7 +131,7 @@ function AppAdvanced() {
         setData(result.posts || result);
       } catch (err) {
         setError(err.message);
-        console.error('Fetch error:', err);
+        console.error("Fetch error:", err);
       } finally {
         setLoading(false);
       }
@@ -139,21 +141,21 @@ function AppAdvanced() {
   }, [retryCount]); // Re-fetch when retryCount changes
 
   const handleRetry = () => {
-    setRetryCount(prev => prev + 1);
+    setRetryCount((prev) => prev + 1);
   };
 
   return (
     <div className="p-4 border border-blue-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-blue-600 mb-2">Advanced App (With Retry)</h3>
-      
-      {loading && (
-        <div className="text-blue-600 mb-2">Loading posts...</div>
-      )}
-      
+      <h3 className="text-lg font-semibold text-blue-600 mb-2">
+        Advanced App (With Retry)
+      </h3>
+
+      {loading && <div className="text-blue-600 mb-2">Loading posts...</div>}
+
       {error && (
         <div className="text-red-600 mb-2">
           Error: {error}
-          <button 
+          <button
             onClick={handleRetry}
             className="ml-2 px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600"
           >
@@ -161,13 +163,13 @@ function AppAdvanced() {
           </button>
         </div>
       )}
-      
+
       {!loading && !error && (
         <div>
           <p className="text-sm text-gray-600 mb-2">
             Posts loaded: {data.length}
           </p>
-          <button 
+          <button
             onClick={handleRetry}
             className="px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600"
           >
@@ -175,7 +177,7 @@ function AppAdvanced() {
           </button>
         </div>
       )}
-      
+
       <p className="text-xs text-blue-600 mt-2">
         ✅ Advanced solution with retry functionality
       </p>
@@ -186,8 +188,10 @@ function AppAdvanced() {
 export default function InfiniteEffectLoop() {
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">Infinite Effect Loop Bug</h2>
-      
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Infinite Effect Loop Bug
+      </h2>
+
       <div className="mb-6 p-4 bg-gray-100 rounded-lg">
         <h3 className="font-semibold mb-2">Questions:</h3>
         <ol className="list-decimal list-inside space-y-1 text-sm">
@@ -199,15 +203,32 @@ export default function InfiniteEffectLoop() {
       <AppBuggy />
       <AppWrongFix />
       <AppFixed />
+      <AppWithHook />
       <AppAdvanced />
 
       <div className="mt-6 p-4 bg-yellow-100 rounded-lg">
         <h3 className="font-semibold mb-2">Explanation:</h3>
         <ul className="list-disc list-inside space-y-2 text-sm">
-          <li><strong>Bug:</strong> Including [data] in useEffect causes infinite loop</li>
-          <li><strong>Wrong fix:</strong> Just removing dependencies works but incomplete</li>
-          <li><strong>Correct fix:</strong> Use empty [] + add loading/error states</li>
-          <li><strong>Advanced:</strong> Add retry functionality with controlled re-fetching</li>
+          <li>
+            <strong>Bug:</strong> Including [data] in useEffect causes infinite
+            loop
+          </li>
+          <li>
+            <strong>Wrong fix:</strong> Just removing dependencies works but
+            incomplete
+          </li>
+          <li>
+            <strong>Correct fix:</strong> Use empty [] + add loading/error
+            states
+          </li>
+          <li>
+            <strong>Custom hook:</strong> Extract logic into reusable custom
+            hook
+          </li>
+          <li>
+            <strong>Advanced:</strong> Add retry functionality with controlled
+            re-fetching
+          </li>
         </ul>
       </div>
     </div>
