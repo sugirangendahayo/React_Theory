@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /*
 ## Questions:
@@ -29,7 +29,7 @@ function LoggerBuggy() {
   return (
     <div className="p-4 border border-red-300 rounded-lg mb-4">
       <h3 className="text-lg font-semibold text-red-600 mb-2">Buggy Logger</h3>
-      <button 
+      <button
         onClick={() => setCount(count + 1)}
         className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
       >
@@ -56,8 +56,10 @@ function LoggerWrongFix() {
 
   return (
     <div className="p-4 border border-yellow-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-yellow-600 mb-2">Wrong Fix (Performance Issue)</h3>
-      <button 
+      <h3 className="text-lg font-semibold text-yellow-600 mb-2">
+        Wrong Fix (Performance Issue)
+      </h3>
+      <button
         onClick={() => setCount(count + 1)}
         className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
       >
@@ -70,7 +72,38 @@ function LoggerWrongFix() {
   );
 }
 
-// Step 3: Correct fix using useRef
+// Step 3: Alternative fix with useCallback (still not ideal)
+function LoggerCallbackFix() {
+  const [count, setCount] = React.useState(0);
+
+  const logCount = React.useCallback(() => {
+    console.log(count);
+  }, [count]);
+
+  React.useEffect(() => {
+    const id = setInterval(logCount, 1000);
+    return () => clearInterval(id);
+  }, [logCount]); // Still recreates interval when count changes
+
+  return (
+    <div className="p-4 border border-orange-300 rounded-lg mb-4">
+      <h3 className="text-lg font-semibold text-orange-600 mb-2">
+        useCallback Fix (Still Not Ideal)
+      </h3>
+      <button
+        onClick={() => setCount(count + 1)}
+        className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+      >
+        Increment: {count}
+      </button>
+      <p className="text-sm text-gray-600 mt-2">
+        Uses useCallback but still recreates interval - not optimal!
+      </p>
+    </div>
+  );
+}
+
+// Step 4: Correct fix using useRef
 function LoggerFixed() {
   const [count, setCount] = React.useState(0);
   const countRef = React.useRef(count);
@@ -92,8 +125,10 @@ function LoggerFixed() {
 
   return (
     <div className="p-4 border border-green-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-green-600 mb-2">Fixed Logger (useRef)</h3>
-      <button 
+      <h3 className="text-lg font-semibold text-green-600 mb-2">
+        Fixed Logger (useRef - Optimal)
+      </h3>
+      <button
         onClick={() => setCount(count + 1)}
         className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
       >
@@ -109,8 +144,10 @@ function LoggerFixed() {
 export default function StaleEffectDependency() {
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">Stale Effect Dependency Bug</h2>
-      
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Stale Effect Dependency Bug
+      </h2>
+
       <div className="mb-6 p-4 bg-gray-100 rounded-lg">
         <h3 className="font-semibold mb-2">Questions:</h3>
         <ol className="list-decimal list-inside space-y-1 text-sm">
@@ -121,14 +158,24 @@ export default function StaleEffectDependency() {
 
       <LoggerBuggy />
       <LoggerWrongFix />
+      <LoggerCallbackFix />
       <LoggerFixed />
 
       <div className="mt-6 p-4 bg-yellow-100 rounded-lg">
         <h3 className="font-semibold mb-2">Explanation:</h3>
         <ul className="list-disc list-inside space-y-2 text-sm">
-          <li><strong>Bug:</strong> useEffect with [] captures stale count value (always 0)</li>
-          <li><strong>Wrong fix:</strong> Adding [count] recreates interval every second</li>
-          <li><strong>Correct fix:</strong> Use useRef to maintain current count reference</li>
+          <li>
+            <strong>Bug:</strong> useEffect with [] captures stale count value
+            (always 0)
+          </li>
+          <li>
+            <strong>Wrong fix:</strong> Adding [count] recreates interval every
+            second
+          </li>
+          <li>
+            <strong>Correct fix:</strong> Use useRef to maintain current count
+            reference
+          </li>
         </ul>
       </div>
     </div>
