@@ -211,8 +211,8 @@ function WindowSizeAdvanced() {
   }, []);
 
   return (
-    <div className="p-4 border border-orange-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-orange-600 mb-2">
+    <div className="p-4 border border-indigo-300 rounded-lg mb-4">
+      <h3 className="text-lg font-semibold text-indigo-600 mb-2">
         Advanced WindowSize (Multiple Listeners)
       </h3>
       <div className="text-sm text-gray-600 mb-2">
@@ -220,7 +220,7 @@ function WindowSizeAdvanced() {
         <p>Window Height: {size.height}px</p>
         <p>Orientation: {orientation}</p>
       </div>
-      <p className="text-xs text-orange-600">
+      <p className="text-xs text-indigo-600">
         ✅ Advanced: Multiple event listeners with proper cleanup
       </p>
     </div>
@@ -271,6 +271,7 @@ export default function CleanupMisunderstanding() {
           <WindowSizeFixed />
           <WindowSizeCallback />
           <WindowSizeWithHook />
+          <WindowSizeWithTracking />
           <WindowSizeAdvanced />
         </>
       )}
@@ -290,6 +291,9 @@ export default function CleanupMisunderstanding() {
           </li>
           <li>
             <strong>Correct fix:</strong> Use named function or useCallback
+          </li>
+          <li>
+            <strong>Performance:</strong> Track listener lifecycle for debugging
           </li>
           <li>
             <strong>Best practice:</strong> Extract into custom hooks
