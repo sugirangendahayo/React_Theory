@@ -13,7 +13,7 @@ const Counter = () => {
   return (
     <>
       <div className="flex justify-center items-center h-screen">
-        <div className="flex  items-center gap-4">
+        <div className="flex  items-center gap-6">
           <button
             className="bg-cyan-800 text-white p-4 rounded-xl cursor-pointer"
             onClick={increment}
