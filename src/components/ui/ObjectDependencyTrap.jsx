@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /*
 ## Questions:
@@ -19,18 +19,20 @@ function SearchBuggy({ query }) {
   const options = { query }; // BUG: New object created on every render
 
   React.useEffect(() => {
-    console.log('Fetching with options:', options);
-    fetch("https://dummyjson.com/posts/search", { 
-      method: "POST", 
-      body: JSON.stringify(options) 
+    console.log("Fetching with options:", options);
+    fetch("https://dummyjson.com/posts/search", {
+      method: "POST",
+      body: JSON.stringify(options),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setResults);
   }, [options]); // Re-runs on every render due to new object reference
 
   return (
     <div className="p-4 border border-red-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-red-600 mb-2">Buggy Search (Refetches Every Render)</h3>
+      <h3 className="text-lg font-semibold text-red-600 mb-2">
+        Buggy Search (Refetches Every Render)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">
         Query: "{query}" | Results: {results.length}
       </p>
@@ -48,18 +50,20 @@ function SearchWrongFix({ query }) {
   const options = { query };
 
   React.useEffect(() => {
-    console.log('Fetching with options:', options);
-    fetch("https://dummyjson.com/posts/search", { 
-      method: "POST", 
-      body: JSON.stringify(options) 
+    console.log("Fetching with options:", options);
+    fetch("https://dummyjson.com/posts/search", {
+      method: "POST",
+      body: JSON.stringify(options),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setResults);
   }, []); // WRONG: No dependencies - won't refetch when query changes
 
   return (
     <div className="p-4 border border-yellow-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-yellow-600 mb-2">Wrong Fix (No Dependencies)</h3>
+      <h3 className="text-lg font-semibold text-yellow-600 mb-2">
+        Wrong Fix (No Dependencies)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">
         Query: "{query}" | Results: {results.length}
       </p>
@@ -78,18 +82,20 @@ function SearchFixedMemo({ query }) {
   const options = React.useMemo(() => ({ query }), [query]);
 
   React.useEffect(() => {
-    console.log('Fetching with memoized options:', options);
-    fetch("https://dummyjson.com/posts/search", { 
-      method: "POST", 
-      body: JSON.stringify(options) 
+    console.log("Fetching with memoized options:", options);
+    fetch("https://dummyjson.com/posts/search", {
+      method: "POST",
+      body: JSON.stringify(options),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setResults);
   }, [options]); // Only re-runs when query actually changes
 
   return (
     <div className="p-4 border border-green-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-green-600 mb-2">Fixed Search (useMemo)</h3>
+      <h3 className="text-lg font-semibold text-green-600 mb-2">
+        Fixed Search (useMemo)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">
         Query: "{query}" | Results: {results.length}
       </p>
@@ -107,12 +113,12 @@ function SearchFixedCallback({ query }) {
   // FIX: Memoize the fetch function
   const fetchResults = React.useCallback(() => {
     const options = { query };
-    console.log('Fetching with callback:', options);
-    fetch("https://dummyjson.com/posts/search", { 
-      method: "POST", 
-      body: JSON.stringify(options) 
+    console.log("Fetching with callback:", options);
+    fetch("https://dummyjson.com/posts/search", {
+      method: "POST",
+      body: JSON.stringify(options),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setResults);
   }, [query]);
 
@@ -122,7 +128,9 @@ function SearchFixedCallback({ query }) {
 
   return (
     <div className="p-4 border border-blue-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-blue-600 mb-2">Fixed Search (useCallback)</h3>
+      <h3 className="text-lg font-semibold text-blue-600 mb-2">
+        Fixed Search (useCallback)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">
         Query: "{query}" | Results: {results.length}
       </p>
@@ -133,29 +141,103 @@ function SearchFixedCallback({ query }) {
   );
 }
 
-// Step 5: Simple fix - move object inside useEffect
+// Step 2: Custom hook solution
+function useSearchResults(query) {
+  const [results, setResults] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    if (!query.trim()) {
+      setResults([]);
+      return;
+    }
+
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // FIX: Create options object inside useEffect
+        const options = { query };
+        console.log("Fetching with custom hook:", options);
+
+        const response = await fetch("https://dummyjson.com/posts/search", {
+          method: "POST",
+          body: JSON.stringify(options),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setResults(data.posts || data);
+      } catch (err) {
+        setError(err.message);
+        console.error("Search error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [query]); // Depend on query directly
+
+  return { results, loading, error };
+}
+
+function SearchWithHook({ query }) {
+  const { results, loading, error } = useSearchResults(query);
+
+  return (
+    <div className="p-4 border border-purple-300 rounded-lg mb-4">
+      <h3 className="text-lg font-semibold text-purple-600 mb-2">
+        Search with Custom Hook
+      </h3>
+
+      {loading && <div className="text-blue-600 mb-2">Searching...</div>}
+
+      {error && <div className="text-red-600 mb-2">Error: {error}</div>}
+
+      {!loading && !error && (
+        <p className="text-sm text-gray-600 mb-2">
+          Query: "{query}" | Results: {results.length}
+        </p>
+      )}
+
+      <p className="text-xs text-purple-600">
+        ✅ Clean solution with reusable custom hook!
+      </p>
+    </div>
+  );
+}
+
+// Step 3: Simple fix - move object inside useEffect
 function SearchFixedSimple({ query }) {
   const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
     // FIX: Create options object inside useEffect
     const options = { query };
-    console.log('Fetching with internal options:', options);
-    fetch("https://dummyjson.com/posts/search", { 
-      method: "POST", 
-      body: JSON.stringify(options) 
+    console.log("Fetching with internal options:", options);
+    fetch("https://dummyjson.com/posts/search", {
+      method: "POST",
+      body: JSON.stringify(options),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setResults);
   }, [query]); // Depend on query directly, not the object
 
   return (
-    <div className="p-4 border border-purple-300 rounded-lg mb-4">
-      <h3 className="text-lg font-semibold text-purple-600 mb-2">Fixed Search (Simple)</h3>
+    <div className="p-4 border border-orange-300 rounded-lg mb-4">
+      <h3 className="text-lg font-semibold text-orange-600 mb-2">
+        Fixed Search (Simple)
+      </h3>
       <p className="text-sm text-gray-600 mb-2">
         Query: "{query}" | Results: {results.length}
       </p>
-      <p className="text-xs text-purple-600">
+      <p className="text-xs text-orange-600">
         ✅ Fixed! Move object inside useEffect, depend on query.
       </p>
     </div>
@@ -167,8 +249,10 @@ export default function ObjectDependencyTrap() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">Object Dependency Trap Bug</h2>
-      
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Object Dependency Trap Bug
+      </h2>
+
       <div className="mb-6 p-4 bg-gray-100 rounded-lg">
         <h3 className="font-semibold mb-2">Questions:</h3>
         <ol className="list-decimal list-inside space-y-1 text-sm">
@@ -197,16 +281,32 @@ export default function ObjectDependencyTrap() {
       <SearchWrongFix query={query} />
       <SearchFixedMemo query={query} />
       <SearchFixedCallback query={query} />
+      <SearchWithHook query={query} />
       <SearchFixedSimple query={query} />
 
       <div className="mt-6 p-4 bg-yellow-100 rounded-lg">
         <h3 className="font-semibold mb-2">Explanation:</h3>
         <ul className="list-disc list-inside space-y-2 text-sm">
-          <li><strong>Bug:</strong> Object {query} is recreated on every render</li>
-          <li><strong>Wrong fix:</strong> Removing dependencies breaks reactivity</li>
-          <li><strong>useMemo fix:</strong> Memoize object to prevent recreation</li>
-          <li><strong>useCallback fix:</strong> Memoize fetch function instead</li>
-          <li><strong>Simple fix:</strong> Move object inside useEffect, depend on primitive</li>
+          <li>
+            <strong>Bug:</strong> Object {query} is recreated on every render
+          </li>
+          <li>
+            <strong>Wrong fix:</strong> Removing dependencies breaks reactivity
+          </li>
+          <li>
+            <strong>useMemo fix:</strong> Memoize object to prevent recreation
+          </li>
+          <li>
+            <strong>useCallback fix:</strong> Memoize fetch function instead
+          </li>
+          <li>
+            <strong>Custom hook:</strong> Extract logic into reusable custom
+            hook
+          </li>
+          <li>
+            <strong>Simple fix:</strong> Move object inside useEffect, depend on
+            primitive
+          </li>
         </ul>
       </div>
     </div>
