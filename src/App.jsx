@@ -1,6 +1,7 @@
 // import Calculator from "./components/ui/Calculator";
 // import Counter from "./components/ui/Counter";
 
+import DataShapesObjects from "./components/ui/DataShapesObjects";
 import FilteringData from "./components/ui/FilteringData";
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       {/* <DisplayPosts /> */}
       {/* <Counter /> */}
       {/* {<Calculator />} */}
-      <FilteringData />
+      {/* <FilteringData /> */}
+      <DataShapesObjects />
     </>
   );
 }
