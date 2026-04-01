@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserRow = ({ name, country }) => {
+const UserRow = ({ name, country , score}) => {
   return (
     <>
       <div className="flex flex-row gap-4 justify-center items-center m-2 bg-gray-600 text-white">
