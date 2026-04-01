@@ -1,6 +1,8 @@
 // import Calculator from "./components/ui/Calculator";
 // import Counter from "./components/ui/Counter";
 
+import FilteringData from "./components/ui/FilteringData";
+
 function App() {
   console.log("App rendered!");
   return (
@@ -9,6 +11,7 @@ function App() {
       {/* <DisplayPosts /> */}
       {/* <Counter /> */}
       {/* {<Calculator />} */}
+      <FilteringData />
     </>
   );
 }
