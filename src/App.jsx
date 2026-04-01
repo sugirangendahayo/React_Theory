@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function App() {
   const [number, setNumber] = useState(0);
 
-  // Effect to log when it runs
+  
   useEffect(() => {
     console.log("useEffect ran! Number:", number);
   }, [number]);
@@ -13,12 +13,20 @@ export default function App() {
   return (
     <div style={{ padding: "20px" }}>
       <h1>Number: {number}</h1>
-      <button onClick={() => setNumber(0)}>
-        Set number to 0
-      </button>
-      <button onClick={() => setNumber(Math.floor(Math.random() * 10))}>
-        Set number to random
-      </button>
+      <div className="flex gap-6">
+        <button
+          onClick={() => setNumber(0)}
+          className="p-2 rounded-xl bg-cyan-900 text-white cursor-pointer"
+        >
+          Set number to 0
+        </button>
+        <button
+          onClick={() => setNumber(Math.floor(Math.random() * 10))}
+          className="p-2 rounded-xl bg-cyan-900 text-white cursor-pointer"
+        >
+          Set number to random
+        </button>
+      </div>
     </div>
   );
 }
