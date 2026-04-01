@@ -11,7 +11,7 @@ const FilteringData = () => {
   return (
     <>
       {products
-        .filter((p) => p.inStock === false)
+        .filter((p) => p.inStock === true)
         .map((product) => (
           <p key={product.id}>{product.name}</p>
         ))}
