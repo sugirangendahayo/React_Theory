@@ -6,6 +6,7 @@ import React from "react";
 function App() {
   const [numbers, setNumbers] = React.useState([1, 2, 3]);
   const updatedNumbers = [...numbers, 4];
+  setNumbers(updatedNumbers)
 
   return (
     <>
