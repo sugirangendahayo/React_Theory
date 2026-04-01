@@ -1,25 +1,36 @@
 import React, { useState } from "react";
 
 const LiftStateUp = () => {
-    type Text ={
-        text: string,
-        setText: string
-    }
-  const [text, setText] = useState<Text>();
+  const [text, setText] = useState<string>("");
+
   return (
     <>
       <Input text={text} setText={setText} />
-      <Preview  text={text}/>
+      <Preview text={text} />
     </>
   );
 };
 
 export default LiftStateUp;
 
-function Input({ text, setText }) {
-  return <input value={text} onChange={(e) => setText(e.target.value)} />;
+type InputProps = {
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function Input({ text, setText }: InputProps) {
+  return (
+    <input
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+    />
+  );
 }
 
-function Preview({ text }) {
+type PreviewProps = {
+  text: string;
+};
+
+function Preview({ text }: PreviewProps) {
   return <p>{text}</p>;
 }
