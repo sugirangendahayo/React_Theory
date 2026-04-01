@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 const LiftStateUp = () => {
-  const [text, setText] = useState("");
+    type Text ={
+        text: string,
+        setText: string
+    }
+  const [text, setText] = useState<Text>();
   return (
     <>
       <Input text={text} setText={setText} />
