@@ -1,4 +1,5 @@
 import Calculator from "./components/ui/Calculator";
+import LiftStateUp from "./components/ui/LiftStateUp";
 // import Counter from "./components/ui/Counter";
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
       {/* <NavBar /> */}
       {/* <DisplayPosts /> */}
       {/* <Counter /> */}
-      {<Calculator />}
+      {/* {<Calculator />} */}
+      <LiftStateUp/>
     </>
   );
 }
