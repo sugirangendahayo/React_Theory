@@ -1,32 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+// import Calculator from "./components/ui/Calculator";
 
-export default function App() {
-  const [number, setNumber] = useState(0);
+// import Counter from "./components/ui/Counter";
 
-  
-  useEffect(() => {
-    console.log("useEffect ran! Number:", number);
-  }, [number]);
-
-  console.log("App rendered! Number:", number);
+function App() {
+  const [numbers, setNumbers] = React.useState([1, 2, 3]);
+  const updatedNumbers = [...numbers, 4];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Number: {number}</h1>
-      <div className="flex gap-6">
-        <button
-          onClick={() => setNumber(0)}
-          className="p-2 rounded-xl bg-cyan-900 text-white cursor-pointer"
-        >
-          Set number to 0
-        </button>
-        <button
-          onClick={() => setNumber(Math.floor(Math.random() * 10))}
-          className="p-2 rounded-xl bg-cyan-900 text-white cursor-pointer"
-        >
-          Set number to random
-        </button>
-      </div>
-    </div>
+    <>
+      {updatedNumbers.map((item) => (
+        <p key={item}>{item}</p>
+      ))}
+    </>
   );
 }
+
+export default App;
