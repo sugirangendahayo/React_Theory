@@ -1,4 +1,5 @@
-import Counter from "./components/ui/Counter";
+import Calculator from "./components/ui/Calculator";
+// import Counter from "./components/ui/Counter";
 
 function App() {
   console.log("App rendered!");
@@ -6,8 +7,8 @@ function App() {
     <>
       {/* <NavBar /> */}
       {/* <DisplayPosts /> */}
-      <Counter />
-      {/* <Calculator /> */}
+      {/* <Counter /> */}
+      {<Calculator />}
     </>
   );
 }
